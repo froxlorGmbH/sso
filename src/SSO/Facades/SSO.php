@@ -2,7 +2,7 @@
 
 namespace FroxlorGmbH\SSO\Facades;
 
-use FroxlorGmbH\SSO\SSO as BitinflowAccountsService;
+use FroxlorGmbH\SSO\SSO as SSOService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Facade;
 
@@ -16,6 +16,6 @@ class SSO extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return BitinflowAccountsService::class;
+        return SSOService::class;
     }
 }

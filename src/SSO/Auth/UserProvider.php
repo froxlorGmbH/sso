@@ -21,7 +21,7 @@ class UserProvider implements Base
     protected $providerName;
 
     /**
-     * Create a new Bitinflow Accounts user provider.
+     * Create a new SSO user provider.
      *
      * @param Base $provider
      * @param string $providerName

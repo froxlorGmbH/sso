@@ -87,7 +87,7 @@ class TokenGuard
             return null;
         }
 
-        return $token ? $user->withBitinflowAccessToken($token) : null;
+        return $token ? $user->withSsoAccessToken($token) : null;
     }
 
     /**
@@ -138,7 +138,7 @@ class TokenGuard
         // is physically logged into the application via the application's interface.
         /** @var Authenticatable|HasSSOTokens $user */
         if ($user = $this->provider->retrieveById($token['sub'])) {
-            return $user->withBitinflowAccessToken((object)['scopes' => ['*']]);
+            return $user->withSsoAccessToken((object)['scopes' => ['*']]);
         }
 
         return null;

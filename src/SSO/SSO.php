@@ -35,16 +35,16 @@ class SSO
     public static string $cookie = 'sso_token';
 
     /**
-     * Indicates if Bitinflow Accounts should ignore incoming CSRF tokens.
+     * Indicates if SSO should ignore incoming CSRF tokens.
      */
     public static bool $ignoreCsrfToken = false;
 
     /**
-     * Indicates if Bitinflow Accounts should unserializes cookies.
+     * Indicates if SSO should unserializes cookies.
      */
     public static bool $unserializesCookies = false;
 
-    private static string $baseUrl = 'https://sso.accounts.com/api/';
+    private static string $baseUrl = 'https://sso.froxlor.com/api/';
 
     /**
      * Guzzle is used to make http requests.
@@ -137,7 +137,7 @@ class SSO
      */
     public static function actingAs($user, $scopes = [], $guard = 'api')
     {
-        $user->withBitinflowAccessToken((object)[
+        $user->withSsoAccessToken((object)[
             'scopes' => $scopes
         ]);
 

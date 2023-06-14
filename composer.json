@@ -47,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bitinflow\\Accounts\\Providers\\BitinflowAccountsServiceProvider"
+                "FroxlorGmbH\\SSO\\Providers\\SSOServiceProvider"
             ],
             "aliases": {
-                "BitinflowAccounts": "FroxlorSSO"
+                "SSO": "FroxlorSSO"
             }
         }
     }

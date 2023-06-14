@@ -16,7 +16,7 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * Unique Provider Identifier.
      */
-    const IDENTIFIER = 'BITINFLOW_ACCOUNTS';
+    const IDENTIFIER = 'SSO_ACCOUNTS';
 
     /**
      * {@inheritdoc}

@@ -41,7 +41,7 @@ trait HasSSOTokens
      * @param stdClass $accessToken
      * @return $this
      */
-    public function withBitinflowAccessToken(stdClass $accessToken): self
+    public function withSsoAccessToken(stdClass $accessToken): self
     {
         $this->accessToken = $accessToken;
 

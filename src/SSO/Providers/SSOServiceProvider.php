@@ -8,7 +8,6 @@ use FroxlorGmbH\SSO\SSO;
 use FroxlorGmbH\SSO\Helpers\JwtParser;
 use FroxlorGmbH\SSO\Contracts;
 use FroxlorGmbH\SSO\Repository;
-use Bitinflow\Payments\BitinflowPayments;
 use Illuminate\Auth\RequestGuard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -38,9 +37,6 @@ class SSOServiceProvider extends ServiceProvider
         $this->app->singleton(Contracts\AppTokenRepository::class, Repository\AppTokenRepository::class);
         $this->app->singleton(SSO::class, function () {
             return new SSO;
-        });
-        $this->app->singleton(BitinflowPayments::class, function () {
-            return new BitinflowPayments;
         });
 
         $this->registerGuard();
@@ -88,7 +84,6 @@ class SSOServiceProvider extends ServiceProvider
     {
         return [
             SSO::class,
-            BitinflowPayments::class,
         ];
     }
 }
