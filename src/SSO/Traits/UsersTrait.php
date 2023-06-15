@@ -17,7 +17,7 @@ trait UsersTrait
      */
     public function getAuthedUser(): Result
     {
-        return $this->get('v3/user');
+        return $this->get('v1/users/me');
     }
 
     /**
@@ -29,7 +29,7 @@ trait UsersTrait
      */
     public function createUser(array $parameters): Result
     {
-        return $this->post('v3/users', $parameters);
+        return $this->post('v1/users', $parameters);
     }
 
     /**
@@ -41,7 +41,7 @@ trait UsersTrait
      */
     public function isEmailExisting(string $email): Result
     {
-        return $this->post('v3/users/check', [
+        return $this->post('v1/users/check', [
             'email' => $email,
         ]);
     }
