@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 class SSOUserProvider implements UserProvider
 {
     private $sso;
+    private $authIdentifier = null;
     private $accessTokenField = null;
     private $fields;
     private $model;
@@ -21,14 +22,14 @@ class SSOUserProvider implements UserProvider
     public function __construct(
         SSO     $sso,
         Request $request,
-        string  $model,
-        array   $fields,
-        ?string $accessTokenField = null
-    ) {
+        array   $config
+    )
+    {
         $this->request = $request;
-        $this->model = $model;
-        $this->fields = $fields;
-        $this->accessTokenField = $accessTokenField;
+        $this->model = $config['model'] ?? "\\App\\Models\\User";
+        $this->fields = $config['fields'] ?? [];
+        $this->authIdentifier = $config['model_key'] ?? null;
+        $this->accessTokenField = $config['access_token_field'] ?? null;
         $this->sso = $sso;
     }
 
@@ -40,9 +41,10 @@ class SSOUserProvider implements UserProvider
     {
         $model = $this->createModel();
         $token = $this->request->bearerToken();
+        $authIdentifier = $this->authIdentifier ?: $model->getAuthIdentifierName();
 
         $user = $this->newModelQuery($model)
-            ->where($model->getAuthIdentifierName(), $identifier)
+            ->where($authIdentifier, $identifier)
             ->first();
 
         // Return user when found
@@ -55,7 +57,7 @@ class SSOUserProvider implements UserProvider
                     $user->save();
                 }
             }
-            
+
             return $user;
         }
 
@@ -67,8 +69,13 @@ class SSOUserProvider implements UserProvider
             return null;
         }
 
-        $attributes = Arr::only((array)$result->data(), $this->fields);
-        $attributes[$model->getAuthIdentifierName()] = $result->data->id;
+        $ssoAttributes = Arr::only((array)$result->data(), array_keys($this->fields));
+        $attributes = [];
+        $attributes[$authIdentifier] = $result->data->id;
+
+        foreach ($this->fields as $sso_field => $local_field) {
+            $attributes[$local_field] = $ssoAttributes[$sso_field];
+        }
 
         if ($this->accessTokenField) {
             $attributes[$this->accessTokenField] = $token;

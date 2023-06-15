@@ -18,9 +18,7 @@ public function boot()
         return new SSOUserProvider(
             $app->make(SSO::class),
             $app->make(Request::class),
-            $config['model'],
-            $config['fields'] ?? [],
-            $config['access_token_field'] ?? null
+            $config
         );
     });
 }
@@ -54,7 +52,8 @@ reference the provider in the `providers` configuration of your `auth.php` confi
     'sso-users' => [
         'driver' => 'sso-users',
         'model' => App\Models\User::class,
-        'fields' => ['first_name', 'last_name', 'email'],
+        'model_key' => 'sso_user_id',
+        'fields' => ['name' => 'name', 'email' => 'email'],
         'access_token_field' => 'sso_access_token',
     ],
 ],
