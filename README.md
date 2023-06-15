@@ -14,7 +14,7 @@ PHP froxlor GmbH SSO API Client for Laravel 10+
 ## Installation
 
 ```
-composer require d00p/sso
+composer require froxlorgmbh/sso
 ```
 
 **If you use Laravel 10+ you are already done, otherwise continue.**
@@ -173,7 +173,7 @@ public function getAuthedUser()
 public function createUser(array $parameters)
 ```
 
-[**OAuth Scopes Enums**](https://github.com/d00p/sso/blob/main/src/Enums/Scope.php)
+[**OAuth Scopes Enums**](https://github.com/froxlorGmbH/sso/blob/main/src/Enums/Scope.php)
 
 ## Development
 
